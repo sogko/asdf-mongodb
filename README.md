@@ -2,6 +2,11 @@
 
 [MongoDB](https://www.mongodb.org) binary plugin for [asdf](https://github.com/asdf-vm/asdf)
 
+## Pre-requisites
+`asdf-mongodb` plugin requires the following to work
+- `jq`
+- `awk`
+
 ## Limitations
 
 This plugin downloads the most generic binary for the given version number of MongoDB. Which means:

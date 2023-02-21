@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+
+plugin_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${plugin_dir}/../lib/utils.bash"
+
+check_prereq "jq"
+check_prereq "curl"
+
+download_current_versions_list() {
+  local src_url="https://downloads.mongodb.org/current.json"
+  if [ -z "$current_versions_list" ]; then
+    current_versions_list=$(curl -# -L 2> /dev/null $src_url)
+  fi
+}
+
+list_stable_versions() {
+  download_current_versions_list
+  stable_versions=`echo $current_versions_list \
+    | jq -r '[
+        .versions[] 
+        | select(.production_release == true) 
+        | select(.release_candidate == false) 
+        | .version][0]'
+    `
+}
+
+list_stable_versions
+echo $stable_versions

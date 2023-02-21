@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o pipefail
+
+plugin_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${plugin_dir}/../lib/utils.bash"
+
+check_prereq "jq"
+check_prereq "curl"
+check_prereq "awk"
+
 download_full_versions_list() {
-    local src_url="https://downloads.mongodb.org/full.json"
-    if [ -z "$full_versions_list" ]; then
-      full_versions_list=$(curl -# -L 2> /dev/null $src_url)
-    fi
+  local src_url="https://downloads.mongodb.org/full.json"
+
+  if [ -z "$full_versions_list" ]; then
+    full_versions_list=$(curl -# -L 2> /dev/null $src_url)
+  fi
 } 
 
 list_versions() {
