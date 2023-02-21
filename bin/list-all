@@ -1,3 +1,21 @@
 #!/usr/bin/env bash
-versions_list="$(curl -s http://dl.mongodb.org/dl/src/ | awk '!/_rc/ && /http:\/\/downloads.mongodb.org\/src\/mongodb-src-r.*.tar.gz\"/{sub(/^.*mongodb-src-r/,"");sub(/\.tar.gz.*$/,"");print}' | sort)"
-echo $versions_list
+
+download_full_versions_list() {
+    local src_url="https://downloads.mongodb.org/full.json"
+    if [ -z "$full_versions_list" ]; then
+      full_versions_list=$(curl -# -L 2> /dev/null $src_url)
+    fi
+} 
+
+list_versions() {
+  download_full_versions_list
+  versions=`echo $full_versions_list \
+    | egrep -o "([0]\.[8-9]+\.[0-9]+([-_\.]rc[0-9]+)?)|([1-9]\.[0-9]+\.[0-9]+([-_\.]rc[0-9]+)?)" \
+    | sort -u \
+    | sort -s -k 2.3n -t - \
+    | sort -s -k 1,1n -k 2,2n -k 3,3n -t .\
+    | awk '{ if ($1 ) { print "  " $1 } }'`
+}
+
+list_versions
+echo $versions
