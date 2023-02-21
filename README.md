@@ -43,12 +43,12 @@ asdf list-all mongodb
 
 To list current releases versions
 ```
-asdf list-current mongodb
+asdf mongodb list mongodb
 ```
 
 To list development versions
 ```
-asdf list-development mongodb
+asdf mongodb list development 
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to install & manage versions of MongoDB.
