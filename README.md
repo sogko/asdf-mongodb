@@ -18,6 +18,42 @@ For this reason, this plugin is targeted for development environments. For produ
 
 Also, this plugin handles only the installation of the binary file. You will still need to set up your data directory (for example, `mkdir -p /data/db`, and setting permissions so that `mongod` can read it) manually. Please consult the [Installation Guide](https://docs.mongodb.org/manual/installation/) of your environment for details.
 
+## Install
+
+```
+asdf plugin-add mongodb https://github.com/sylph01/asdf-mongodb.git
+```
+
+## Use
+
+To install latest **stable** binary
+```
+asdf install mongodb latest
+```
+
+To display latest stable version
+```
+asdf latest mongodb
+```
+
+To list ALL versions (including current archived, development releases)
+```
+asdf list-all mongodb
+```
+
+To list current releases versions
+```
+asdf list-current mongodb
+```
+
+To list development versions
+```
+asdf list-development mongodb
+```
+
+Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to install & manage versions of MongoDB.
+
+
 ## Versioning Convention of MongoDB
 
 MongoDB uses a versioning convention where:
@@ -27,13 +63,3 @@ MongoDB uses a versioning convention where:
 - Minor version numbers indicate bugfix/security releases
 
 All versions that can be downloaded from the server is included in the version list. In most of the cases, you will install the **even-numbered production release** with the **highest minor version number.**
-
-## Install
-
-```
-asdf plugin-add mongodb https://github.com/sylph01/asdf-mongodb.git
-```
-
-## Use
-
-Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to install & manage versions of MongoDB.
